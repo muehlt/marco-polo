@@ -8,5 +8,5 @@ ehthumbs.db
 Thumbs.db
 
 # data
-/data
+/data/*
 !/data/source.md
