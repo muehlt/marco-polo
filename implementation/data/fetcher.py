@@ -6,14 +6,16 @@ import os
 from pathlib import Path
 import bz2
 from halo import Halo
+import shutil
 
 class Fetcher:
     # NOTE: clear directory if keep-archives changed after download, skipping check if already downloaded everything
     keep_archives = False
     datapath = "../data/"
-    urls = ['http://www.cp.jku.at/datasets/LFM-2b/recsys22/listening_events.tsv.bz2',
-            'http://www.cp.jku.at/datasets/LFM-2b/recsys22/tracks.tsv.bz2',
-            'http://www.cp.jku.at/datasets/LFM-2b/recsys22/users.tsv.bz2']
+    #urls = ['http://www.cp.jku.at/datasets/LFM-2b/recsys22/listening_events.tsv.bz2',
+    #        'http://www.cp.jku.at/datasets/LFM-2b/recsys22/tracks.tsv.bz2',
+    #        'http://www.cp.jku.at/datasets/LFM-2b/recsys22/users.tsv.bz2']
+    urls = ['https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/msmarco.zip']
 
     def __fetch(self):
         for url in self.urls:
@@ -32,9 +34,9 @@ class Fetcher:
                 progress_bar.close()
 
             else: 
-                print(f"File {filename} or {uncomp_filename} found locally, skipped download")
+                print(f"File {filename} or dir {uncomp_filename} found locally, skipped download")
 
-    def __extract(self):
+    def __extract_bz2(self):
         for url in self.urls:
             filename = os.path.basename(url)
             uncomp_filename = Path(filename).stem
@@ -52,7 +54,25 @@ class Fetcher:
                     spinner.succeed("Removed archive " + filename)
             else:
                 print(f"File {uncomp_filename} found locally, skipped extraction")
+    
+    def __extract_zip(self):
+        for url in self.urls:
+            filename = os.path.basename(url)
+            uncomp_filename = Path(filename).stem
+            if not os.path.exists(self.datapath + uncomp_filename):
+                spinner = Halo(text="Extracting " + filename, spinner='dots')
+                spinner.start()
+                shutil.unpack_archive(self.datapath + filename, self.datapath + uncomp_filename)
+                spinner.succeed("Extracted " + filename)
+
+                if not self.keep_archives:
+                    spinner = Halo(text="Removing archive " + filename, spinner='dots')
+                    spinner.start()
+                    os.remove(self.datapath + filename)
+                    spinner.succeed("Removed archive " + filename)
+            else:
+                print(f"Dir {uncomp_filename} found locally, skipped extraction")
 
     def fullSetup(self):
         self.__fetch()
-        self.__extract()
+        self.__extract_zip()
