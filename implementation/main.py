@@ -9,17 +9,19 @@ def main():
     fetcher.fullSetup()
     
     loader = Loader()
-    loader.loadTuples(1000, 1000)
+    loader.loadTuples(100000, 100000)
     corpus = loader.getCorpus()
     queries = loader.getQueries()
 
     corpus_processor = Processor(corpus)
-    c_no_punctuations = corpus_processor.getPunctuationRemoved()
-    c_no_stopwords    = corpus_processor.getStopwordRemoved()
-    c_tokenized       = corpus_processor.getTokenized()
-    c_stemmed         = corpus_processor.getStemmed()
+    c_doc_embedded    = corpus_processor.doPreprocessingStack()
 
-    print(c_stemmed)
+    print(c_doc_embedded)
+
+    query_processor = Processor(queries)
+    q_doc_embedded    = query_processor.doPreprocessingStack()
+
+    print(q_doc_embedded)
 
 if __name__ == '__main__':
     main()

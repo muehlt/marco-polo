@@ -34,7 +34,7 @@ class Fetcher:
                 progress_bar.close()
 
             else: 
-                print(f"File {filename} or dir {uncomp_filename} found locally, skipped download")
+                print(f"File {filename} or directory {uncomp_filename} found locally, skipped download")
 
     def __extract_bz2(self):
         for url in self.urls:
@@ -71,7 +71,7 @@ class Fetcher:
                     os.remove(self.datapath + filename)
                     spinner.succeed("Removed archive " + filename)
             else:
-                print(f"Dir {uncomp_filename} found locally, skipped extraction")
+                print(f"Directory {uncomp_filename} found locally, skipped extraction")
 
     def fullSetup(self):
         self.__fetch()
