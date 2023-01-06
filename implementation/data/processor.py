@@ -4,10 +4,6 @@ import re
 import gensim
 import numpy as np
 
-# NOTE: We tried a lot of cleaning methods because of the unicode hex characters in the corpus and queries.
-#       However encodings seem to be mixed, because the dataset is web scraped. Also getPunctuationRemoved
-#       will discard those characters in a way that is usable for tokenization.  
-
 class Processor:
     def __init__(self, pd_data):
         self.pd_data = pd_data
