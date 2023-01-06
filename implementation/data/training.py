@@ -14,8 +14,8 @@ import pandas as pd
 # TODO: REPLACE WITH SPINNERS
 
 print("Loading data...")
-loader = Loader()
-loader.loadTuples(100000,100000) # TODO: FIT TO DATA WE REALLY USE OR WHOLE CORPUS IF RESOURCES!
+loader = Loader(use_reduced=True)
+loader.loadTuples(-1,-1)
 corpus = loader.getCorpus()
 queries = loader.getQueries()
 del corpus['title']

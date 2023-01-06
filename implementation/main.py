@@ -8,8 +8,8 @@ def main():
     fetcher = Fetcher()
     fetcher.fullSetup()
     
-    loader = Loader()
-    loader.loadTuples(100000, 100000)
+    loader = Loader(use_reduced=True)
+    loader.loadTuples(-1, -1)
     corpus = loader.getCorpus()
     queries = loader.getQueries()
 

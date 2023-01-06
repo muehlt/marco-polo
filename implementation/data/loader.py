@@ -6,9 +6,9 @@ class Loader:
     corpus = []
     queries = []
 
-    def __init__(self):
-        self.f_corpus = open(self.docpath + 'corpus.jsonl')
-        self.f_queries = open(self.docpath + 'queries.jsonl')
+    def __init__(self, use_reduced=False):
+        self.f_corpus = open(self.docpath + 'corpus.reduced.jsonl' if use_reduced else 'corpus.jsonl')
+        self.f_queries = open(self.docpath + 'queries.reduced.jsonl' if use_reduced else 'queries.jsonl')
 
     def loadTuples(self, NR_CORPUS_TUPLES, NR_QUERY_TUPLES):
         corpus_lines  = self.f_corpus.readlines()
