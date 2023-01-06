@@ -16,15 +16,19 @@ class Loader:
 
         nr_actual_corpus_tuples = 0
         for line in corpus_lines[:NR_CORPUS_TUPLES]:
-            self.corpus.append(json.loads(line))
+            j_str_line = json.loads(line)
+            j_str_line['_id'] = int(j_str_line['_id'])
+            self.corpus.append(j_str_line)
             nr_actual_corpus_tuples += 1
-        print(f"Loaded {nr_actual_corpus_tuples} corpus tuples")
+        #print(f"Loaded {nr_actual_corpus_tuples} corpus tuples")
 
         nr_actual_query_tuples = 0
         for line in queries_lines[:NR_QUERY_TUPLES]:
-            self.queries.append(json.loads(line))
+            j_str_line = json.loads(line)
+            j_str_line['_id'] = int(j_str_line['_id'])
+            self.queries.append(j_str_line)
             nr_actual_query_tuples += 1
-        print(f"Loaded {nr_actual_query_tuples} query tuples")
+        #print(f"Loaded {nr_actual_query_tuples} query tuples")
     
     def getCorpus(self):
         return pd.DataFrame(self.corpus, columns=['_id', 'title', 'text', 'metadata'])
