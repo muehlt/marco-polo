@@ -7,15 +7,15 @@ class Loader:
     queries = []
 
     def __init__(self, use_reduced=False):
-        self.f_corpus = open(self.docpath + 'corpus.reduced.jsonl' if use_reduced else 'corpus.jsonl')
-        self.f_queries = open(self.docpath + 'queries.reduced.jsonl' if use_reduced else 'queries.jsonl')
+        self.f_corpus = open(self.docpath + ('corpus.reduced.jsonl' if use_reduced else 'corpus.jsonl'))
+        self.f_queries = open(self.docpath + ('queries.reduced.jsonl' if use_reduced else 'queries.jsonl'))
 
-    def loadTuples(self, NR_CORPUS_TUPLES, NR_QUERY_TUPLES):
+    def loadTuples(self, corpus_slice=slice(None, None, 1), query_slice=slice(None, None, 1)):
         corpus_lines  = self.f_corpus.readlines()
         queries_lines = self.f_queries.readlines()
 
         nr_actual_corpus_tuples = 0
-        for line in corpus_lines[:NR_CORPUS_TUPLES]:
+        for line in corpus_lines[corpus_slice]:
             j_str_line = json.loads(line)
             j_str_line['_id'] = int(j_str_line['_id'])
             self.corpus.append(j_str_line)
@@ -23,7 +23,7 @@ class Loader:
         #print(f"Loaded {nr_actual_corpus_tuples} corpus tuples")
 
         nr_actual_query_tuples = 0
-        for line in queries_lines[:NR_QUERY_TUPLES]:
+        for line in queries_lines[query_slice]:
             j_str_line = json.loads(line)
             j_str_line['_id'] = int(j_str_line['_id'])
             self.queries.append(j_str_line)

@@ -10,11 +10,9 @@ spinner.start()
 
 test = pd.DataFrame(pd.read_csv("../data/msmarco/msmarco/qrels/test.tsv", sep="\t")) 
 loader = Loader()
-loader.loadTuples(-1,-1) # load all tuples
+loader.loadTuples()
 corpus = loader.getCorpus()
 queries = loader.getQueries()
-
-print(corpus.dtypes, queries.dtypes)
 
 # if using tsv for better performance
 # corpus = pd.DataFrame(pd.read_csv("../data/msmarco/msmarco/corpus.tsv", sep="\t"))

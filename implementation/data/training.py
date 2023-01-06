@@ -15,7 +15,7 @@ import pandas as pd
 
 print("Loading data...")
 loader = Loader(use_reduced=True)
-loader.loadTuples(-1,-1)
+loader.loadTuples()
 corpus = loader.getCorpus()
 queries = loader.getQueries()
 del corpus['title']
