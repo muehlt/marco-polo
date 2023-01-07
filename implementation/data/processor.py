@@ -67,7 +67,7 @@ class Processor:
                 doc_ids.append(row['text'])
 
         for index in doc_indices:
-            self.pd_data.drop(index)
+            self.pd_data.drop(index, inplace=True)
 
         return doc_ids
 
@@ -79,7 +79,7 @@ class Processor:
                 if doc_id == row['corpus-id']:
                     doc_indices.append(index)
         for index in doc_indices:
-            test.drop(index)
+            test.drop(index, inplace=True)
 
         return test
 
