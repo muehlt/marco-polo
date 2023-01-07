@@ -1,4 +1,5 @@
 import nltk
+import pandas as pd
 from nltk.stem.snowball import SnowballStemmer
 import re
 import gensim
@@ -59,11 +60,26 @@ class Processor:
 
     def removeTextsCorpus(self):
         doc_indices = []
+        doc_ids = []
         for index, row in self.pd_data.iterrows():
             if row['text'].count('.') / len(row['text']) >= 0.1:
                 doc_indices.append(index)
+                doc_ids.append(row['text'])
 
         for index in doc_indices:
             self.pd_data.drop(index)
 
+        return doc_ids
+
+    def removeTextIdsTest(self,doc_ids):
+        test = pd.DataFrame(pd.read_csv("../data/msmarco/msmarco/qrels/test.tsv", sep="\t"))
+        doc_indices = []
+        for index, row in test.iterrows():
+            for doc_id in doc_ids:
+                if doc_id == row['corpus-id']:
+                    doc_indices.append(index)
+        for index in doc_indices:
+            test.drop(index)
+
+        return test
 

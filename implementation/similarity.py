@@ -10,17 +10,18 @@ def calc_cosine_similarity(array1, array2):
 
 class Similarity:
 
-    def __init__(self, corpus, queries):
+    def __init__(self, corpus, queries,test):
         self.corpus = corpus
         self.queries = queries
+        self.test = test
 
     def recall(self, data, threshold):
         result_dict = {}
         for i,col in enumerate(data.columns):
             retrieved_list = data[i].loc[data[i] >= threshold].index.tolist()
             query_id = self.queries['_id'][i]
-            test = pd.DataFrame(pd.read_csv("../data/msmarco/msmarco/qrels/test.tsv", sep="\t"))
-            base_relevant = test['corpus-id'].loc[test['query-id'] == query_id].tolist()
+            #test = pd.DataFrame(pd.read_csv("../data/msmarco/msmarco/qrels/test.tsv", sep="\t"))
+            base_relevant = self.test['corpus-id'].loc[self.test['query-id'] == query_id].tolist()
             intersection_relevant_retrieved = set(retrieved_list) & set(base_relevant)
             recall = len(intersection_relevant_retrieved) / len(base_relevant)
             result_dict[query_id] = recall
@@ -31,8 +32,8 @@ class Similarity:
         for i,col in enumerate(data.columns):
             retrieved_list = data[i].loc[data[i] >= threshold].index.tolist()
             query_id = self.queries['_id'][i]
-            test = pd.DataFrame(pd.read_csv("../data/msmarco/msmarco/qrels/test.tsv", sep="\t"))
-            base_relevant = test['corpus-id'].loc[test['query-id'] == query_id].tolist()
+            #test = pd.DataFrame(pd.read_csv("../data/msmarco/msmarco/qrels/test.tsv", sep="\t"))
+            base_relevant = self.test['corpus-id'].loc[self.test['query-id'] == query_id].tolist()
             intersection_relevant_retrieved = set(retrieved_list) & set(base_relevant)
             recall = len(intersection_relevant_retrieved) / len(retrieved_list)
             result_dict[query_id] = recall
