@@ -16,6 +16,7 @@ def main():
     summaries = loader.getSummaries()
 
     corpus_processor = Processor(corpus)
+    corpus_processor.removeTextsCorpus()
     c_doc_embedded    = corpus_processor.doPreprocessingStack()
 
     #print(c_doc_embedded)

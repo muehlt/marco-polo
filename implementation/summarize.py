@@ -1,6 +1,7 @@
 import torch
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 from data.loader import Loader
+from data.processor import Processor
 from tqdm import tqdm
 import pandas as pd
 
@@ -15,6 +16,8 @@ print("Loading data...")
 loader = Loader(use_reduced=True)
 loader.loadTuples()
 corpus = loader.getCorpus()
+corpus_processor = Processor(corpus)
+corpus_processor.removeTextsCorpus()
 
 progress_bar = tqdm(total=len(corpus), desc=f"Generating summaries using {device}", unit="docs")
 summarized_texts = []

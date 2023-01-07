@@ -4,6 +4,7 @@ import re
 import gensim
 import numpy as np
 
+
 class Processor:
     def __init__(self, pd_data):
         self.pd_data = pd_data
@@ -24,16 +25,16 @@ class Processor:
             filtered = " ".join([word for word in text.split() if not word in stopwords])
             self.pd_data['text'].at[idx] = filtered
         return self.pd_data
-    
+
     def getTokenized(self):
         self.pd_data['text'] = self.pd_data['text'].apply(lambda txt: nltk.word_tokenize(txt))
         return self.pd_data
-    
+
     def getStemmed(self):
         sbstemmer = SnowballStemmer("english")
         self.pd_data['text'] = self.pd_data['text'].apply(lambda txt: [sbstemmer.stem(word) for word in txt])
         return self.pd_data
-    
+
     def getEmbedded(self):
         model = gensim.models.Word2Vec.load("word2vec.model")
         self.pd_data['text'] = self.pd_data['text'].apply(lambda txt: [model.wv[word] for word in txt])
@@ -41,7 +42,7 @@ class Processor:
 
     def getDocEmbedded(self):
         # returns 1 averaged vector for each document/query
-        self.pd_data['text'] = self.pd_data['text'].apply(lambda vecs: np.mean( np.array(vecs), axis=0 ))
+        self.pd_data['text'] = self.pd_data['text'].apply(lambda vecs: np.mean(np.array(vecs), axis=0))
         return self.pd_data
 
     def doPreprocessingStack(self):
@@ -52,6 +53,17 @@ class Processor:
         self.getEmbedded()
         self.getDocEmbedded()
         return self.pd_data
-    
+
     def getData(self):
         return self.pd_data
+
+    def removeTextsCorpus(self):
+        doc_indices = []
+        for index, row in self.pd_data.iterrows():
+            if row['text'].count('.') / len(row['text']) >= 0.1:
+                doc_indices.append(index)
+
+        for index in doc_indices:
+            self.pd_data.drop(index)
+
+
