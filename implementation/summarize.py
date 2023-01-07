@@ -33,12 +33,10 @@ for text in corpus['text']:
 progress_bar.close()
 
 
-corpus['summary'] = summarized_texts
+corpus['text'] = summarized_texts
 
 # write summarized docs to file
 with open("../data/msmarco/msmarco/summaries.jsonl", 'w') as file:
     file.write(corpus.to_json(lines=True, orient='records'))
 
-
-print(corpus[['text', 'summary']])
 

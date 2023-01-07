@@ -45,4 +45,4 @@ class Loader:
         return pd.DataFrame(self.queries, columns=['_id', 'text', 'metadata'])
 
     def getSummaries(self):
-        return pd.DataFrame(self.summaries, columns=['_id', 'text', 'metadata', 'summary'])
+        return pd.DataFrame(self.summaries, columns=['_id', 'text', 'metadata'])
