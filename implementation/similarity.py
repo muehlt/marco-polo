@@ -40,8 +40,8 @@ class Similarity:
 
     def f_score(self,recall_dict,precision_dict):
         f_score_dict = {}
-        for query in enumerate(recall_dict.keys()):
-            f_score = 2*precision_dict[query]*recall_dict[query] / (precision_dict[query]+recall_dict[query])
+        for query in recall_dict.keys():
+            f_score = 0 if (precision_dict[query]+recall_dict[query]) == 0 else 2*precision_dict[query]*recall_dict[query] / (precision_dict[query]+recall_dict[query])
             f_score_dict[query] = f_score
         return f_score_dict
 

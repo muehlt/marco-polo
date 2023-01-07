@@ -18,8 +18,9 @@ loader = Loader(use_reduced=True)
 loader.loadTuples()
 corpus = loader.getCorpus()
 queries = loader.getQueries()
+summaries = loader.getSummaries()
 del corpus['title']
-data = pd.concat([corpus, queries], axis=0, ignore_index=True)
+data = pd.concat([corpus, queries, summaries], axis=0, ignore_index=True)
 
 processor = Processor(data)
 print("Removing punctuation...")
