@@ -34,7 +34,7 @@ def main():
 
     print(c_doc_embedded, s_doc_embedded)
 
-    threshold = 0.875
+    threshold = 0.9
     c_sim_object = Similarity(c_doc_embedded,q_doc_embedded,test)
     c_sim_data = c_sim_object.calc_cosine_similarity_query_docs("corpus")
     c_recall_dict = c_sim_object.recall(c_sim_data,threshold)
@@ -58,9 +58,9 @@ def main():
     data_analyzer.scatter_plot_recall(threshold)
     data_analyzer.scatter_plot_precision(threshold)
     data_analyzer.scatter_plot_fscore(threshold)
-    data_analyzer.boxplot_recall_differences()
-    data_analyzer.boxplot_precision_differences()
-    data_analyzer.boxplot_fscore_differences()
+    data_analyzer.boxplot_recall_differences(threshold)
+    data_analyzer.boxplot_precision_differences(threshold)
+    data_analyzer.boxplot_fscore_differences(threshold)
 
 
 if __name__ == '__main__':

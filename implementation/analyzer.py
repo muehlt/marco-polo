@@ -57,35 +57,41 @@ class Analyzer:
             diff_list.append(corpus[key] - summarized[key])
         return diff_list
 
-    def boxplot_recall_differences(self):
+    def boxplot_recall_differences(self, threshold):
         plt.figure(4)
+        ax = plt.axes()
         diff_recall = self.calculateDiff(self.c_recall, self.s_recall)
         maximum = max(diff_recall)
         minimum = min(diff_recall)
         max_diff = max(abs(maximum), abs(minimum))
-        plt.boxplot(diff_recall, vert=False)
-        plt.xlim(-max_diff-0.05,max_diff+0.05)
-        plt.title("Recall differences")
+        plt.boxplot(diff_recall, vert=False, medianprops=dict(color=self.main_color))
+        plt.xlim(-max_diff-0.02,max_diff+0.02)
+        #plt.title("Recall differences")
+        ax.set_title(f"Recall differences \n t = {threshold}")
         plt.show()
 
-    def boxplot_precision_differences(self):
+    def boxplot_precision_differences(self, threshold):
         plt.figure(5)
+        ax = plt.axes()
         diff_precision = self.calculateDiff(self.c_precision, self.s_precision)
         maximum = max(diff_precision)
         minimum = min(diff_precision)
         max_diff = max(abs(maximum), abs(minimum))
-        plt.boxplot(diff_precision, vert=False)
-        plt.xlim(-max_diff - 0.05, max_diff + 0.05)
-        plt.title("Precision differences")
+        plt.boxplot(diff_precision, vert=False, medianprops=dict(color=self.main_color))
+        plt.xlim(-max_diff - 0.02, max_diff + 0.02)
+        #plt.title("Precision differences")
+        ax.set_title(f"Precision differences \n t = {threshold}")
         plt.show()
 
-    def boxplot_fscore_differences(self):
+    def boxplot_fscore_differences(self, threshold):
         plt.figure(6)
+        ax = plt.axes()
         diff_fscore = self.calculateDiff(self.c_fscore, self.s_fscore)
         maximum = max(diff_fscore)
         minimum = min(diff_fscore)
         max_diff = max(abs(maximum), abs(minimum))
-        plt.boxplot(diff_fscore, vert=False)
-        plt.xlim(-max_diff - 0.05, max_diff + 0.05)
-        plt.title("F-score differences")
+        plt.boxplot(diff_fscore, vert=False, medianprops=dict(color=self.main_color))
+        plt.xlim(-max_diff - 0.02, max_diff + 0.02)
+        #plt.title("F-score differences")
+        ax.set_title(f"F-Score differences \n t = {threshold}")
         plt.show()
