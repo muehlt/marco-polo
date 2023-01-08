@@ -14,11 +14,15 @@ class Analyzer:
         self.keys = list(range(0, 43))
         self.diff_recall = None
 
+        self.main_color = '#1432F4'       # blue
+        self.secondary_color = '#F41432'  # red
+        self.tertiary_color = '#32F414'   # green
+
     def scatter_plot_recall(self, threshold):
         plt.figure(1)
         ax = plt.axes()
-        ax.scatter(self.keys, self.c_recall.values(), label="Corpus")
-        ax.scatter(self.keys, self.s_recall.values(), label="Summaries")
+        ax.scatter(self.keys, self.c_recall.values(), label="Corpus", color=self.main_color)
+        ax.scatter(self.keys, self.s_recall.values(), label="Summaries", color=self.tertiary_color)
         ax.set_title(f"Recall \n t = {threshold}")
         ax.set_ylabel('Recall score')
         ax.set_xlabel('Query IDs')
@@ -28,8 +32,8 @@ class Analyzer:
     def scatter_plot_precision(self, threshold):
         plt.figure(2)
         ax = plt.axes()
-        ax.scatter(self.keys, self.c_precision.values(), label="Corpus")
-        ax.scatter(self.keys, self.s_precision.values(), label="Summaries")
+        ax.scatter(self.keys, self.c_precision.values(), label="Corpus", color=self.main_color)
+        ax.scatter(self.keys, self.s_precision.values(), label="Summaries", color=self.tertiary_color)
         ax.set_title(f"Precision \n t = {threshold}")
         ax.set_ylabel('Precision score')
         ax.set_xlabel('Query IDs')
@@ -39,8 +43,8 @@ class Analyzer:
     def scatter_plot_fscore(self, threshold):
         plt.figure(3)
         ax = plt.axes()
-        ax.scatter(self.keys, self.c_fscore.values(), label="Corpus")
-        ax.scatter(self.keys, self.s_fscore.values(), label="Summaries")
+        ax.scatter(self.keys, self.c_fscore.values(), label="Corpus", color=self.main_color)
+        ax.scatter(self.keys, self.s_fscore.values(), label="Summaries", color=self.secondary_color)
         ax.set_title(f"F-Score \n t = {threshold}")
         ax.set_ylabel('F-Score')
         ax.set_xlabel('Query IDs')
