@@ -12,6 +12,7 @@ class Analyzer:
         self.s_precision = s_precision
         self.s_fscore = s_fscore
         self.keys = list(range(0, 43))
+        self.diff_recall = None
 
     def scatter_plot_recall(self, threshold):
         plt.figure(1)
@@ -44,4 +45,10 @@ class Analyzer:
         ax.set_ylabel('F-Score')
         ax.set_xlabel('Query IDs')
         ax.legend()
+        plt.show()
+
+    def boxplot_recall_differences(self):
+        plt.figure(4)
+        plt.boxplot(self.diff_recall, vert=False)
+        plt.title("Recall differences")
         plt.show()
