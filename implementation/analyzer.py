@@ -27,8 +27,8 @@ class Analyzer:
     def scatter_plot_precision(self, threshold):
         plt.figure(2)
         ax = plt.axes()
-        ax.scatter(self.keys, self.c_recall.values(), label="Corpus")
-        ax.scatter(self.keys, self.s_recall.values(), label="Summaries")
+        ax.scatter(self.keys, self.c_precision.values(), label="Corpus")
+        ax.scatter(self.keys, self.s_precision.values(), label="Summaries")
         ax.set_title(f"Precision \n t = {threshold}")
         ax.set_ylabel('Precision score')
         ax.set_xlabel('Query IDs')
