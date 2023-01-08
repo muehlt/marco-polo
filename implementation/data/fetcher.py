@@ -12,9 +12,6 @@ class Fetcher:
     # NOTE: clear directory if keep-archives changed after download, skipping check if already downloaded everything
     keep_archives = False
     datapath = "../data/"
-    #urls = ['http://www.cp.jku.at/datasets/LFM-2b/recsys22/listening_events.tsv.bz2',
-    #        'http://www.cp.jku.at/datasets/LFM-2b/recsys22/tracks.tsv.bz2',
-    #        'http://www.cp.jku.at/datasets/LFM-2b/recsys22/users.tsv.bz2']
     urls = ['https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/msmarco.zip']
 
     def __fetch(self):

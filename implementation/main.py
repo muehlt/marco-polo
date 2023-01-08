@@ -59,6 +59,8 @@ def main():
     data_analyzer.scatter_plot_precision(threshold)
     data_analyzer.scatter_plot_fscore(threshold)
     data_analyzer.boxplot_recall_differences()
+    data_analyzer.boxplot_precision_differences()
+    data_analyzer.boxplot_fscore_differences()
 
 
 if __name__ == '__main__':
