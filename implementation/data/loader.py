@@ -3,11 +3,12 @@ import pandas as pd
 
 class Loader:
     docpath = "../data/msmarco/msmarco/"
-    corpus = []
-    queries = []
-    summaries = []
 
     def __init__(self, use_reduced=False):
+        self.corpus = []
+        self.queries = []
+        self.summaries = []
+
         self.f_corpus = open(self.docpath + ('corpus.reduced.jsonl' if use_reduced else 'corpus.jsonl'))
         self.f_queries = open(self.docpath + ('queries.reduced.jsonl' if use_reduced else 'queries.jsonl'))
         self.f_summaries = open(self.docpath + ('summaries.jsonl'))
