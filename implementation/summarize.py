@@ -20,23 +20,25 @@ corpus_processor = Processor(corpus)
 corpus_processor.removeTextsCorpus()
 
 progress_bar = tqdm(total=len(corpus), desc=f"Generating summaries using {device}", unit="docs")
-summarized_texts = []
-for text in corpus['text']:
+
+
+def summarize(text):
+    # remove newlines and leading spaces
     preprocessed = text.strip().replace("\n", "")
-    text_to_summarize = "summarize: " + preprocessed
-    text_as_tensors = tokenizer.encode(text_to_summarize,return_tensors='pt').to(device)
-
-    summary_tokens = model.generate(text_as_tensors,max_length=(len(preprocessed.split())-1))
+    # encode
+    text_as_tensors = tokenizer.encode("summarize: " + preprocessed, return_tensors='pt').to(device)
+    # run summary model
+    summary_tokens = model.generate(text_as_tensors, max_length=(len(preprocessed.split()) - 1))
+    # decode
     summary_text = tokenizer.decode(summary_tokens[0], skip_special_tokens=True)
-
-    summarized_texts.append(summary_text)
-
     progress_bar.update(1)
+    return summary_text
+
+
+corpus['text'] = corpus['text'].apply(summarize)
 
 progress_bar.close()
 
-
-corpus['text'] = summarized_texts
 
 # write summarized docs to file
 with open("../data/msmarco/msmarco/summaries.jsonl", 'w') as file:
