@@ -6,7 +6,7 @@ from gensim.models import Word2Vec
 from processor import Processor
 from loader import Loader
 import pandas as pd
-import os
+from multiprocessing import cpu_count
 
 # gensim "sentence" is a list of words, can also be a document, so we don't have to split as long as
 # the belong together contextually
@@ -42,5 +42,5 @@ stemmed         = processor.getStemmed()
 context_words = stemmed['text'].tolist()
 print("Training model...")
 
-model = Word2Vec(sentences=context_words, vector_size=300, window=30, min_count=1, workers=4,sg=1)
+model = Word2Vec(sentences=context_words, vector_size=300, window=30, min_count=1, workers=cpu_count(), sg=1)
 model.save("word2vec.model")
