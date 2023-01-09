@@ -1,3 +1,4 @@
+import numpy as np
 from matplotlib import pyplot as plt
 
 
@@ -27,6 +28,13 @@ class Analyzer:
         ax.set_ylabel('Recall score')
         ax.set_xlabel('Query IDs')
         ax.legend()
+        plt.ylim(0, 1)
+
+        mean_c_recall = np.mean(list(self.c_recall.values()))
+        plt.axhline(y=mean_c_recall, linewidth=2, color=self.main_color, linestyle=':', alpha=0.8)
+        mean_s_recall = np.mean(list(self.s_recall.values()))
+        plt.axhline(y=mean_s_recall, linewidth=2, color=self.tertiary_color, linestyle=':', alpha=0.8)
+
         plt.show()
 
     def scatter_plot_precision(self, threshold):
@@ -38,6 +46,13 @@ class Analyzer:
         ax.set_ylabel('Precision score')
         ax.set_xlabel('Query IDs')
         ax.legend()
+        plt.ylim(0, 1)
+
+        mean_c_precision = np.mean(list(self.c_precision.values()))
+        plt.axhline(y=mean_c_precision, linewidth=2, color=self.main_color, linestyle=':', alpha=0.8)
+        mean_s_precision = np.mean(list(self.s_precision.values()))
+        plt.axhline(y=mean_s_precision, linewidth=2, color=self.tertiary_color, linestyle=':', alpha=0.8)
+
         plt.show()
 
     def scatter_plot_fscore(self, threshold):
@@ -49,6 +64,13 @@ class Analyzer:
         ax.set_ylabel('F-Score')
         ax.set_xlabel('Query IDs')
         ax.legend()
+        plt.ylim(0, 1)
+
+        mean_c_fscore = np.mean(list(self.c_fscore.values()))
+        plt.axhline(y=mean_c_fscore, linewidth=2, color=self.main_color, linestyle=':', alpha=0.8)
+        mean_s_fscore = np.mean(list(self.s_fscore.values()))
+        plt.axhline(y=mean_s_fscore, linewidth=2, color=self.secondary_color, linestyle=':', alpha=0.8)
+
         plt.show()
 
     def calculateDiff(self, corpus, summarized):
@@ -66,7 +88,6 @@ class Analyzer:
         max_diff = max(abs(maximum), abs(minimum))
         plt.boxplot(diff_recall, vert=False, medianprops=dict(color=self.main_color))
         plt.xlim(-max_diff-0.02,max_diff+0.02)
-        #plt.title("Recall differences")
         ax.set_title(f"Recall differences \n t = {threshold}")
         plt.show()
 
@@ -79,7 +100,6 @@ class Analyzer:
         max_diff = max(abs(maximum), abs(minimum))
         plt.boxplot(diff_precision, vert=False, medianprops=dict(color=self.main_color))
         plt.xlim(-max_diff - 0.02, max_diff + 0.02)
-        #plt.title("Precision differences")
         ax.set_title(f"Precision differences \n t = {threshold}")
         plt.show()
 
@@ -92,6 +112,5 @@ class Analyzer:
         max_diff = max(abs(maximum), abs(minimum))
         plt.boxplot(diff_fscore, vert=False, medianprops=dict(color=self.main_color))
         plt.xlim(-max_diff - 0.02, max_diff + 0.02)
-        #plt.title("F-score differences")
         ax.set_title(f"F-Score differences \n t = {threshold}")
         plt.show()
