@@ -5,7 +5,6 @@ import re
 import gensim
 import numpy as np
 
-
 class Processor:
     def __init__(self, pd_data):
         self.pd_data = pd_data
@@ -13,22 +12,16 @@ class Processor:
         nltk.download('punkt')
 
     def getPunctuationRemoved(self):
-        for idx, row in self.pd_data.iterrows():
-            text = row['text']
-            filtered = re.sub(r"[^\sa-zA-Z0-9]+", '', text)
-            self.pd_data['text'].at[idx] = filtered
+        self.pd_data['text'] = self.pd_data['text'].apply(lambda x: re.sub(r"[^\sa-zA-Z0-9]+", '', x))
         return self.pd_data
 
     def getStopwordRemoved(self):
         stopwords = set(nltk.corpus.stopwords.words('english'))
-        for idx, row in self.pd_data.iterrows():
-            text = row['text']
-            filtered = " ".join([word for word in text.split() if not word in stopwords])
-            self.pd_data['text'].at[idx] = filtered
+        self.pd_data['text'] = self.pd_data['text'].apply(lambda x: " ".join([word for word in x.split() if not word in stopwords]))
         return self.pd_data
 
     def getTokenized(self):
-        self.pd_data['text'] = self.pd_data['text'].apply(lambda txt: nltk.word_tokenize(txt))
+        self.pd_data['text'] = self.pd_data['text'].apply(lambda txt: nltk.word_tokenize(txt)) # .lower() if should be used for pretrained w2v model
         return self.pd_data
 
     def getStemmed(self):
@@ -38,7 +31,7 @@ class Processor:
 
     def getEmbedded(self):
         model = gensim.models.Word2Vec.load("word2vec.model")
-        self.pd_data['text'] = self.pd_data['text'].apply(lambda txt: [model.wv[word] for word in txt])
+        self.pd_data['text'] = self.pd_data['text'].apply(lambda txt: [model[word] for word in txt])
         return self.pd_data
 
     def getDocEmbedded(self):
