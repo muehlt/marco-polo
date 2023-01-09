@@ -1,6 +1,10 @@
 # Marco Polo
 
-TODO: Add link to presentation here
+Testing retrieval performance on summarized documents
+
+[View Presentation Slides](slides.pdf)
+
+## Run
 
 run `main.py` using `/implementation` as base directory for relative imports
 
