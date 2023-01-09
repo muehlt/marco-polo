@@ -34,7 +34,7 @@ def main():
 
     print(c_doc_embedded, s_doc_embedded)
 
-    threshold = 0.9
+    threshold = 0.615
     c_sim_object = Similarity(c_doc_embedded,q_doc_embedded,test)
     c_sim_data = c_sim_object.calc_cosine_similarity_query_docs("corpus")
     c_recall_dict = c_sim_object.recall(c_sim_data,threshold)
