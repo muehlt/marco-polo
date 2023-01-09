@@ -18,7 +18,7 @@ class Training:
         # since word2vec oftern classifies better if more data is provided, we introduced the
         # option to extend the training data with the data that is not used in the processing
         # the extended data also includes data tuples used in the evaluation processing
-        NR_EXTENDED_TUPLES = 0
+        NR_EXTENDED_TUPLES = 0 # e.g. 10000
 
         print("Loading data...")
         loader = Loader(use_reduced=True)
@@ -35,7 +35,7 @@ class Training:
 
         del corpus['title']
         del ext_corpus['title']
-        data = pd.concat([corpus, queries, summaries, ext_corpus, ext_queries], axis=0, ignore_index=True)
+        data = pd.concat([corpus, queries, summaries, ext_corpus, ext_queries], axis=0, ignore_index=True).drop_duplicates(subset=["_id", "text"]).reset_index(drop=True)
 
         processor = Processor(data)
         print("Removing punctuation...")
