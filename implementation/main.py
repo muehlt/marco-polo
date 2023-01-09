@@ -1,11 +1,17 @@
+import os
 
 from data.fetcher import Fetcher
 from data.loader import Loader
 from data.processor import Processor
 from analyzer import Analyzer
 from similarity import Similarity
+from data.training import Training
 
 def main():
+
+    if not os.path.exists("word2vec.model"):
+        Training()
+
     fetcher = Fetcher()
     fetcher.fullSetup()
     

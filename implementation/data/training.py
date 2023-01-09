@@ -1,10 +1,11 @@
+import os
 
 # I trained a word2vec model here with our sentences
 # beforehand so we can use it later on for word2vec
 from gensim.test.utils import common_texts
 from gensim.models import Word2Vec
-from processor import Processor
-from loader import Loader
+from data.processor import Processor
+from data.loader import Loader
 import pandas as pd
 from multiprocessing import cpu_count
 
@@ -52,5 +53,9 @@ class Training:
         model = Word2Vec(sentences=context_words, vector_size=300, window=30, min_count=1, workers=cpu_count(), sg=1)
         model.save("word2vec.model")
 
-if __name__ == "__main__":
-    Training()
+        if os.path.exists("../data/msmarco/msmarco/cosine_similarity_corpus.tsv"):
+            os.remove("../data/msmarco/msmarco/cosine_similarity_corpus.tsv")
+            print("cosine_similarity_corpus.tsv removed")
+        if os.path.exists("../data/msmarco/msmarco/cosine_similarity_summarized.tsv"):
+            os.remove("../data/msmarco/msmarco/cosine_similarity_summarized.tsv")
+            print("cosine_similarity_summarized.tsv removed")
