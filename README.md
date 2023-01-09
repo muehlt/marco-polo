@@ -7,8 +7,8 @@ run `main.py` using `/implementation` as base directory for relative imports
 ## Conclusions
 
 - Using CBOW: Worse retrieval of summarized documents (reduced Recall and Precision)
-- Using SkipGram: Precision of summarized document retrieval similar to retrieval of non-summarized corpus, Recall still worse
-- Use SkipGram for small datasets, it performs better for our data in general
+- Using Skip-gram: Precision of summarized document retrieval similar to retrieval of non-summarized corpus, Recall still worse
+- Use Skip-gram for small datasets, it performs better for our data in general
 - Word2Vec works equally well for the reduced dataset as well as an extended dataset, so a small number of words is sufficient for the used Word2Vec model in this context.
 
 ## Roles
