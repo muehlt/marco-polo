@@ -31,7 +31,7 @@ class Processor:
 
     def getEmbedded(self):
         model = gensim.models.Word2Vec.load("word2vec.model")
-        self.pd_data['text'] = self.pd_data['text'].apply(lambda txt: [model.vw[word] for word in txt])
+        self.pd_data['text'] = self.pd_data['text'].apply(lambda txt: [model.wv[word] for word in txt])
         return self.pd_data
 
     def getDocEmbedded(self):
