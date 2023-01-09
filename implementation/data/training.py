@@ -12,6 +12,11 @@ import os
 # the belong together contextually
 # we train with the stemmed data to reduce dimension and we only need it as such later on
 
+# since word2vec oftern classifies better if more data is provided, we introduced the
+# option to extend the training data with the data that is not used in the processing
+# the extended data also includes data tuples used in the evaluation processing
+NR_EXTENDED_TUPLES = 0 # e.g. 100000
+
 print("Loading data...")
 loader = Loader(use_reduced=True)
 loader.loadTuples()
@@ -21,7 +26,7 @@ summaries = loader.getSummaries()
 
 # Extend with data that is not used in the processing later to extend word2vec performance
 ext_loader = Loader(use_reduced=False)
-ext_loader.loadTuples(corpus_slice=slice(100000), query_slice=slice(100000))
+ext_loader.loadTuples(corpus_slice=slice(NR_EXTENDED_TUPLES), query_slice=slice(NR_EXTENDED_TUPLES))
 ext_corpus = loader.getCorpus()
 ext_queries = loader.getQueries()
 
