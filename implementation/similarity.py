@@ -25,7 +25,7 @@ class Similarity:
             intersection_relevant_retrieved = set(retrieved_list) & set(base_relevant)
             recall = len(intersection_relevant_retrieved) / len(base_relevant)
             result_dict[query_id] = recall
-        print("Recall mean "+ str(np.mean(list(result_dict.values()))))
+        #print("Recall mean "+ str(np.mean(list(result_dict.values()))))
         return result_dict
 
     def precision(self, data, threshold):
@@ -37,7 +37,7 @@ class Similarity:
             intersection_relevant_retrieved = set(retrieved_list) & set(base_relevant)
             precision = len(intersection_relevant_retrieved) / len(retrieved_list)
             result_dict[query_id] = precision
-        print("Precision mean " + str(np.mean(list(result_dict.values()))))
+        #print("Precision mean " + str(np.mean(list(result_dict.values()))))
         return result_dict
 
     def f_score(self, recall_dict, precision_dict):
@@ -45,7 +45,7 @@ class Similarity:
         for query in recall_dict.keys():
             f_score = 0 if (precision_dict[query]+recall_dict[query]) == 0 else 2*precision_dict[query]*recall_dict[query] / (precision_dict[query]+recall_dict[query])
             f_score_dict[query] = f_score
-        print(np.mean(list(f_score_dict.values())))
+        #print(np.mean(list(f_score_dict.values())))
         return f_score_dict
 
     def calc_cosine_similarity_query_docs(self, dataset_name):
