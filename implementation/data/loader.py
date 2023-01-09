@@ -23,7 +23,6 @@ class Loader:
             j_str_line['_id'] = int(j_str_line['_id'])
             self.corpus.append(j_str_line)
             nr_actual_corpus_tuples += 1
-        #print(f"Loaded {nr_actual_corpus_tuples} corpus tuples")
 
         nr_actual_query_tuples = 0
         for line in queries_lines[query_slice]:
@@ -31,7 +30,6 @@ class Loader:
             j_str_line['_id'] = int(j_str_line['_id'])
             self.queries.append(j_str_line)
             nr_actual_query_tuples += 1
-        #print(f"Loaded {nr_actual_query_tuples} query tuples")
 
         # load summaries
         for line in self.f_summaries.readlines():

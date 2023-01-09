@@ -29,19 +29,11 @@ def main():
     test = corpus_processor.removeTextIdsTest(removed_ids)
     c_doc_embedded    = corpus_processor.doPreprocessingStack()
 
-    #print(c_doc_embedded)
-
     query_processor = Processor(queries)
     q_doc_embedded    = query_processor.doPreprocessingStack()
 
-    #print(q_doc_embedded)
-
     summaries_processor = Processor(summaries)
     s_doc_embedded    = summaries_processor.doPreprocessingStack()
-
-    #print(q_doc_embedded)
-
-    #print(c_doc_embedded, s_doc_embedded)
 
     threshold = 0.615
 
@@ -68,9 +60,6 @@ def main():
     print(f"Summary Precision mean: {np.mean(list(s_precision_dict.values()))}")
     print(f"Summary F-Score mean: {np.mean(list(s_fscore_dict.values()))}")
 
-    #print("Corpus F-Scores: ", c_fscore_dict)
-    #print("Summaries F-Scores: ", s_fscore_dict)
-
     # plotting
     data_analyzer = Analyzer(c_recall_dict, c_precision_dict, c_fscore_dict,
                              s_recall_dict, s_precision_dict, s_fscore_dict)
@@ -80,7 +69,6 @@ def main():
     data_analyzer.boxplot_recall_differences(threshold)
     data_analyzer.boxplot_precision_differences(threshold)
     data_analyzer.boxplot_fscore_differences(threshold)
-
 
 
 if __name__ == '__main__':
