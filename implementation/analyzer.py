@@ -31,9 +31,9 @@ class Analyzer:
         plt.ylim(0, 1)
 
         mean_c_recall = np.mean(list(self.c_recall.values()))
-        ax.hlines(y=mean_c_recall, xmin=0, xmax=42, linewidth=2, color=self.main_color, linestyle=':', alpha=0.8)
+        plt.axhline(y=mean_c_recall, linewidth=2, color=self.main_color, linestyle=':', alpha=0.8)
         mean_s_recall = np.mean(list(self.s_recall.values()))
-        ax.hlines(y=mean_s_recall, xmin=0, xmax=42, linewidth=2, color=self.tertiary_color, linestyle=':', alpha=0.8)
+        plt.axhline(y=mean_s_recall, linewidth=2, color=self.tertiary_color, linestyle=':', alpha=0.8)
 
         plt.show()
 
@@ -49,9 +49,9 @@ class Analyzer:
         plt.ylim(0, 1)
 
         mean_c_precision = np.mean(list(self.c_precision.values()))
-        ax.hlines(y=mean_c_precision, xmin=0, xmax=42, linewidth=2, color=self.main_color, linestyle=':', alpha=0.8)
+        plt.axhline(y=mean_c_precision, linewidth=2, color=self.main_color, linestyle=':', alpha=0.8)
         mean_s_precision = np.mean(list(self.s_precision.values()))
-        ax.hlines(y=mean_s_precision, xmin=0, xmax=42, linewidth=2, color=self.tertiary_color, linestyle=':', alpha=0.8)
+        plt.axhline(y=mean_s_precision, linewidth=2, color=self.tertiary_color, linestyle=':', alpha=0.8)
 
         plt.show()
 
@@ -67,9 +67,9 @@ class Analyzer:
         plt.ylim(0, 1)
 
         mean_c_fscore = np.mean(list(self.c_fscore.values()))
-        ax.hlines(y=mean_c_fscore, xmin=0, xmax=42, linewidth=2, color=self.main_color, linestyle=':', alpha=0.8)
+        plt.axhline(y=mean_c_fscore, linewidth=2, color=self.main_color, linestyle=':', alpha=0.8)
         mean_s_fscore = np.mean(list(self.s_fscore.values()))
-        ax.hlines(y=mean_s_fscore, xmin=0, xmax=42, linewidth=2, color=self.secondary_color, linestyle=':', alpha=0.8)
+        plt.axhline(y=mean_s_fscore, linewidth=2, color=self.secondary_color, linestyle=':', alpha=0.8)
 
         plt.show()
 
