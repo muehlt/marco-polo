@@ -64,9 +64,9 @@ def main():
     s_recall_dict = s_sim_object.recall(s_sim_data,threshold)
     s_precision_dict = s_sim_object.precision(s_sim_data,threshold)
     s_fscore_dict = s_sim_object.f_score(s_recall_dict, s_precision_dict)
-    print(f"Corpus Recall mean {np.mean(list(s_recall_dict.values()))}")
-    print(f"Corpus Precision mean: {np.mean(list(s_precision_dict.values()))}")
-    print(f"Corpus F-Score mean: {np.mean(list(s_fscore_dict.values()))}")
+    print(f"Summary Recall mean {np.mean(list(s_recall_dict.values()))}")
+    print(f"Summary Precision mean: {np.mean(list(s_precision_dict.values()))}")
+    print(f"Summary F-Score mean: {np.mean(list(s_fscore_dict.values()))}")
 
     #print("Corpus F-Scores: ", c_fscore_dict)
     #print("Summaries F-Scores: ", s_fscore_dict)
